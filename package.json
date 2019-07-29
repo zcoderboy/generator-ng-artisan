@@ -1,0 +1,20 @@
+{
+    "name": "generator-ng-artisan",
+    "version": "1.0.0",
+    "description": "An Angular and Laravel project generator",
+    "main": "index.js",
+    "keywords": [
+        "yeoman-generator",
+        "ng-artisan"
+    ],
+    "repository": "https://github.com/Samba24/generator-ng-artisan",
+    "author": "Samba Ndiaye",
+    "license": "MIT",
+    "dependencies": {
+        "chalk": "^2.4.2",
+        "commander": "^2.20.0",
+        "inquirer": "^6.5.0",
+        "ora": "^3.4.0",
+        "template-file": "^3.1.0"
+    }
+}
