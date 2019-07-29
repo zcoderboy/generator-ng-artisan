@@ -12,7 +12,14 @@ function createEnv(data, name) {
 
 async function generateLaravelApp(name) {
     return new Promise((resolve, reject) => {
-        resolve(spawn('cmd', ['/c', `cd C:/xampp/htdocs && composer create-project --prefer-dist laravel/laravel ${name}`], { stdio: 'inherit' }))
+        let child = spawn('cmd', ['/c', `cd C:/xampp/htdocs && composer create-project --prefer-dist laravel/laravel ${name}`], { stdio: 'inherit' })
+        child.on('close', (code) => {
+            if (code !== 0)
+                console.error(`Laravel project creation failed with code : ${code}`)
+            else
+                console.info(`Laravel project creation failed with code : ${code}`)
+            resolve()
+        })
     })
 }
 module.exports = { createEnv, generateLaravelApp }
