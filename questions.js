@@ -31,4 +31,10 @@ const angularQuestions = [{
     message: "\t Name ->"
 }, ];
 
-module.exports = { laravelQuestions, angularQuestions }
+const postInstallQuestions = [{
+    type: "input",
+    name: "value",
+    message: "\t Would you like us to start your projects ? [y/N] ->"
+}]
+
+module.exports = { laravelQuestions, angularQuestions, postInstallQuestions }

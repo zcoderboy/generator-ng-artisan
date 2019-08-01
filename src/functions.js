@@ -12,7 +12,7 @@ function createEnv(data, name) {
 
 async function generateLaravelApp(name, database) {
     return new Promise((resolve, reject) => {
-        exec(`(git clone https://github.com/Samba24/laravel-basic-rest.git ${name} && cd ${name} && composer install && php artisan make:database ${database} && php artisan migrate && php artisan db:seed)`,
+        exec(`(git clone https://github.com/Samba24/laravel-basic-rest.git ${name} && cd ${name} && composer install && php artisan make:database ${database})`,
             (error, stdout, stderr) => {
                 if (error) {
                     reject(`${error}`)
