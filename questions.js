@@ -26,15 +26,9 @@ const laravelQuestions = [{
 ];
 
 const angularQuestions = [{
-        type: "input",
-        name: "projectName",
-        message: "\t Name ->"
-    },
-    {
-        type: "input",
-        name: "projectLocation",
-        message: "\t Location (i.e 'C://something/here') ->"
-    }
-];
+    type: "input",
+    name: "name",
+    message: "\t Name ->"
+}, ];
 
 module.exports = { laravelQuestions, angularQuestions }
