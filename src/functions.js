@@ -1,12 +1,13 @@
 const fs = require("fs")
 const exec = require('child_process').exec;
+const chalk = require('chalk');
 
 const { renderString } = require('template-file')
 const { env } = require('./env')
 
 function createEnv(data, name) {
     fs.writeFile(`./${name}/.env`, renderString(env, data), function(err) {
-        err ? console.error('Unable to write env variables') : console.log('Laravel environment variables set')
+        err ? console.error(chalk.bold.red('\nUnable to write env variables')) : ''
     })
 }
 
@@ -15,7 +16,7 @@ async function generateLaravelApp(name, database) {
         exec(`(git clone https://github.com/Samba24/laravel-basic-rest.git ${name} && cd ${name} && composer install && php artisan make:database ${database})`,
             (error, stdout, stderr) => {
                 if (error) {
-                    reject(`${error}`)
+                    reject(`${stderr}`)
                 } else {
                     resolve()
                 }

@@ -1,12 +1,9 @@
-const fs = require("fs");
 const commander = require("commander");
 const { prompt } = require("inquirer");
-const util = require('util')
-const spawn = require('child_process').spawn;
+const exec = require('child_process').exec;
 const chalk = require('chalk');
-const { laravelQuestions, angularQuestions, postInstallQuestions } = require('./questions');
-const { renderTemplateFile } = require('template-file');
-const { envDataAngular, envDataLaravel } = require('./src/placeholders')
+const { laravelQuestions, angularQuestions } = require('./src/questions');
+const { envDataLaravel } = require('./src/placeholders')
 const func = require('./src/functions')
 const ora = require('ora')
 
@@ -34,44 +31,38 @@ commander
                     throbber.stopAndPersist({
                         symbol: '✅ ',
                         text: 'Laravel project generated with a status code of 200'
+                    });
+                    //Generating Angular project
+                    let mythrobber = ora({
+                        text: 'Generating Angular project...'
+                    }).start()
+                    func.generateAngularApp(angularAnswers.name).then(() => {
+                        mythrobber.stopAndPersist({
+                            symbol: '✅ ',
+                            text: 'Angular project generated with a status code of 200'
+                        });
+                        exec(`cd ${laravelAnswers.name} && php artisan migrate && php artisan db:seed`, (stderr) => {
+                            if (stderr) {
+                                console.error(stderr);
+                            } else {
+                                console.log("\nYour projects were successfully generated.\nRun php artisan serve on your Laravel project to get your server up and running.\nRun ng serve on your Angular project to start your server.\nAngular HTTP requests are made on the following URL : http://localhost:8000/api. You can change it in the env file.\nHappy hacking!")
+                            }
+                        });
+                    }).catch((error) => {
+                        mythrobber.stopAndPersist({
+                            symbol: '❌ ',
+                            text: 'ERROR'
+                        })
+                        console.log(chalk.bold.red(error))
                     })
+
                 }).catch((error) => {
                     throbber.stopAndPersist({
                         symbol: '❌ ',
                         text: 'ERROR'
-                    })
+                    });
                     console.log(chalk.bold.red(error))
                 });
-
-                //Generating Angular project
-                let mythrobber = ora({
-                    text: 'Generating Angular project...'
-                }).start()
-                func.generateAngularApp(angularAnswers.name).then(() => {
-                    mythrobber.stopAndPersist({
-                        symbol: '✅ ',
-                        text: 'Angular project generated with a status code of 200'
-                    })
-                    prompt(postInstallQuestions).then(answer => {
-                        if (answer.value == 'y' || answer.value == '') {
-                            let child = spawn(`cd ${laravelAnswers.name} && php artisan migrate && php artisan db:seed && php artisan serve`);
-                            child.stdout('data', (data) => {
-                                console.log(`\n${data}`);
-                            })
-                            child.stderr('data', (data) => {
-                                console.log(`\n${data}`);
-                            })
-                        } else {
-                            console.log('Happy hacking DEV !')
-                        }
-                    })
-                }).catch((error) => {
-                    mythrobber.stopAndPersist({
-                        symbol: '❌ ',
-                        text: 'ERROR'
-                    })
-                    console.log(chalk.bold.red(error))
-                })
             })
 
         })
