@@ -6,17 +6,37 @@ const { renderString } = require('template-file')
 const { env } = require('./env')
 
 function createEnv(data, name) {
-    fs.writeFile(`./${name}/.env`, renderString(env, data), function(err) {
-        err ? console.error(chalk.bold.red('\nUnable to write env variables')) : ''
+    return new Promise((resolve, reject) => {
+        fs.writeFile(`./${name}/.env`, renderString(env, data), (err) => {
+            if (err) {
+                reject(err.message)
+            } else {
+                resolve()
+            }
+        })
     })
 }
 
-async function generateLaravelApp(name, database) {
+async function generateLaravelApp(name) {
     return new Promise((resolve, reject) => {
-        exec(`(git clone https://github.com/Samba24/laravel-basic-rest.git ${name} && cd ${name} && composer install && php artisan make:database ${database})`,
+        exec(`(git clone https://github.com/Samba24/laravel-basic-rest.git ${name})`,
             (error, stdout, stderr) => {
                 if (error) {
-                    reject(`${stderr}`)
+                    reject(`${stdout}`)
+                } else {
+                    resolve(true)
+                }
+            }
+        )
+    })
+}
+
+async function doComposerInstall(name, database) {
+    return new Promise((resolve, reject) => {
+        exec(`(cd ${name} && composer install && php artisan make:database ${database} && php artisan migrate && php artisan db:seed)`,
+            (error, stdout, stderr) => {
+                if (error) {
+                    reject(`${stdout}`)
                 } else {
                     resolve()
                 }
@@ -30,7 +50,7 @@ async function generateAngularApp(name) {
         exec(`(git clone https://github.com/Samba24/angular-basic-crud.git ${name} && cd ${name} && npm install)`,
             (error, stdout, stderr) => {
                 if (error) {
-                    reject(`${error}`)
+                    reject(`${stdout}`)
                 } else {
                     resolve()
                 }
@@ -39,4 +59,4 @@ async function generateAngularApp(name) {
     })
 }
 
-module.exports = { createEnv, generateLaravelApp, generateAngularApp }
+module.exports = { createEnv, generateLaravelApp, generateAngularApp, doComposerInstall }

@@ -6,7 +6,8 @@ const laravelQuestions = [{
     {
         type: "input",
         name: "host",
-        message: "\t Database host (localhost) ->"
+        message: "\t Database host ->",
+        default: "127.0.0.1"
     },
     {
         type: "input",
@@ -16,12 +17,13 @@ const laravelQuestions = [{
     {
         type: "input",
         name: "username",
-        message: "\t Database user (root) ->"
+        message: "\t Database user ->",
+        default: "root"
     },
     {
         type: "input",
         name: "password",
-        message: "\t Database password->"
+        message: "\t Database password ->"
     }
 ];
 
