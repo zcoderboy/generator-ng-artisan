@@ -1,9 +1,0 @@
-Looking for git in: git
-Using git 2.21.0 from git
-> git rev-parse --show-toplevel
-> git rev-parse --git-dir
-> git config --get commit.template
-Open repository: /home/ghost/Documents/ng-artisan/angular-basic-crud
-> git status -z -u
-> git symbolic-ref --short HEAD
-> git rev-parse master
