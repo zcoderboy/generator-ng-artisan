@@ -11,7 +11,7 @@ These instructions will help you install the CLI on your local machine.
 
 To use this generator, make sure you already installed Node JS, PHP and Composer on your machine.<br>
 You can get a fresh copy of Node and Composer using this links below<br>
-https://nodejs.org\
+https://nodejs.org<br>
 https://getcomposer.org
 
 ### Installing
