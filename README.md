@@ -9,14 +9,14 @@ These instructions will help you install the CLI on your local machine.
 
 ### Prerequisites
 
-To use this generator, make sure you already installed Node JS, PHP and Composer on your machine.\
-You can get a fresh copy of Node and Composer using this links below\ 
+To use this generator, make sure you already installed Node JS, PHP and Composer on your machine.<br>
+You can get a fresh copy of Node and Composer using this links below<br>
 https://nodejs.org\
 https://getcomposer.org
 
 ### Installing
 
-To start using the generator you have to install the package globally using Node with this command
+To start using the generator you have to install the package globally using Node with this command<br>
 
 ```
 npm i -g generator-ng-artisan
@@ -24,13 +24,13 @@ npm i -g generator-ng-artisan
 
 ## Usage
 
-ng-artisan only have one command (for now) that is actually doing a lot for you.\
-To generate your projects, grab a command line and type in the command below\
+ng-artisan only have one command (for now) that is actually doing a lot for you.<br>
+To generate your projects, grab a command line and type in the command below
 
 ```
 nga new
 ```
-Here is a list of what the command do\
+Here is a list of what the command do
 *  Creates a new Laravel project with the name supplied.
 *  Creates a new database with the given name and seed it with random datas.
 *  Sets up a basic CRUD on the datas and expose them as an API.
@@ -39,10 +39,10 @@ Here is a list of what the command do\
 Also make sure your local database server and application server are up and running before executing the command.
 
 ## API endpoints
-api/randoms            : To get all randoms\
-api/random/add         : To add a new random\
-api/random/delete/{id} : To delete a random\
-api/random/update/{id} : To update a rando
+api/randoms            : To get all randoms<br>
+api/random/add         : To add a new random<br>
+api/random/delete/{id} : To delete a random<br>
+api/random/update/{id} : To update a random<br>
 
 
 ## Contributing
