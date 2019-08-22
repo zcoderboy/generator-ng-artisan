@@ -9,6 +9,7 @@
         "angular",
         "laravel"
     ],
+    "homepage": "https://github.com/Samba24/generator-ng-artisan",
     "repository": "https://github.com/Samba24/generator-ng-artisan",
     "author": "Samba Ndiaye",
     "license": "MIT",
